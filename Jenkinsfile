@@ -10,15 +10,15 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git 'https://github.com/YOUR_USERNAME/gke-fullstack-cicd.git'
+        git 'https://github.com/skfarid45/K8S-GKE-FullStack-CI-CD-Deployment.git'
       }
     }
 
     stage('Build Images') {
       steps {
         sh '''
-        docker build -t $FRONTEND_IMAGE:$BUILD_NUMBER frontend/
-        docker build -t $BACKEND_IMAGE:$BUILD_NUMBER backend/
+        docker build -t $FRONTEND_IMAGE:$BUILD_NUMBER Frontend/
+        docker build -t $BACKEND_IMAGE:$BUILD_NUMBER Backend/
         '''
       }
     }
