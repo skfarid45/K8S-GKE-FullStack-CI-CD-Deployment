@@ -6,8 +6,8 @@ pipeline {
         REGION     = 'us-central1-a'
         CLUSTER    = 'cluster-1'
 
-        FRONTEND_IMAGE = "gcr.io/${PROJECT_ID}/frontend"
-        BACKEND_IMAGE  = "gcr.io/${PROJECT_ID}/backend"
+        FRONTEND_IMAGE = "asia-south1-docker.pkg.dev/${PROJECT_ID}/devops-repo/frontend"
+        BACKEND_IMAGE  = "asia-south1-docker.pkg.dev/${PROJECT_ID}/devops-repo/backend"
     }
 
     stages {
@@ -25,7 +25,7 @@ pipeline {
                     sh '''
                     gcloud auth activate-service-account --key-file=$GCP_KEY
                     gcloud config set project $PROJECT_ID
-                    gcloud auth configure-docker gcr.io -q
+                    gcloud auth configure-docker asia-south1-docker.pkg.dev -q
                     '''
                 }
             }
