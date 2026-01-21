@@ -59,7 +59,7 @@ pipeline {
                   --zone $ZONE --project $PROJECT_ID
 
                 sed -e "s|IMAGE_TAG|$BUILD_NUMBER|g" \
-                    k8s/*.yaml | kubectl apply -f k8s/-
+                    k8s/*.yaml | kubectl apply -f -
                 '''
             }
         }
