@@ -12,35 +12,35 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
+        stage('Checkout Code') {
             steps {
                 git branch: 'main',
                     url: 'https://github.com/skfarid45/K8S-GKE-FullStack-CI-CD-Deployment.git'
             }
         }
 
-        stage('Authenticate GCP') {
+        stage('GCP Authentication') {
             steps {
-                withCredentials([file(credentialsId: 'gcp-sa-key', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
+                withCredentials([file(credentialsId: 'gcp-sa-key', variable: 'GCP_KEY')]) {
                     sh '''
-                    gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
+                    gcloud auth activate-service-account --key-file=$GCP_KEY
                     gcloud config set project $PROJECT_ID
-                    gcloud auth configure-docker -q
+                    gcloud auth configure-docker gcr.io -q
                     '''
                 }
             }
         }
 
-        stage('Build Images') {
+        stage('Build Docker Images') {
             steps {
                 sh '''
-                docker build -t $FRONTEND_IMAGE:$BUILD_NUMBER Frontend
-                docker build -t $BACKEND_IMAGE:$BUILD_NUMBER Backend
+                docker build -t $FRONTEND_IMAGE:$BUILD_NUMBER Frontend/
+                docker build -t $BACKEND_IMAGE:$BUILD_NUMBER Backend/
                 '''
             }
         }
 
-        stage('Push Images') {
+        stage('Push Docker Images') {
             steps {
                 sh '''
                 docker push $FRONTEND_IMAGE:$BUILD_NUMBER
@@ -63,4 +63,3 @@ pipeline {
         }
     }
 }
-
