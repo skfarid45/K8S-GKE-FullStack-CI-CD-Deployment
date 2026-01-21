@@ -58,8 +58,7 @@ pipeline {
                 gcloud container clusters get-credentials $CLUSTER \
                   --zone $ZONE --project $PROJECT_ID
 
-                sed -e "s|IMAGE_TAG|$BUILD_NUMBER|g" \
-                    k8s/*.yaml | kubectl apply -f -
+               kubectl apply -f k8s/
                 '''
             }
         }
