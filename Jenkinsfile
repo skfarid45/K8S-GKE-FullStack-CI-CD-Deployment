@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   environment {
-    PROJECT_ID = 'YOUR_PROJECT_ID'
+    PROJECT_ID = 'farid-practice'
     FRONTEND_IMAGE = "gcr.io/${PROJECT_ID}/frontend"
     BACKEND_IMAGE  = "gcr.io/${PROJECT_ID}/backend"
   }
