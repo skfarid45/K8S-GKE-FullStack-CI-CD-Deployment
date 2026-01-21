@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: backend
-        image: gcr.io/farid-practice/Backend:IMAGE_TAG
+        image: us-central1-a-docker.pkg.dev/farid-practice/devops-repo/backend:11
         ports:
         - containerPort: 3000
