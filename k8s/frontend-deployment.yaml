@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend
+  name: frontend
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: backend
+      app: frontend
   template:
     metadata:
       labels:
-        app: backend
+        app: frontend
     spec:
       containers:
-        - name: backend
+        - name: frontend
           image: us-central1-docker.pkg.dev/farid-practice/devops-repo/frontend:IMAGE_TAG
           ports:
             - containerPort: 80
