@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: us-central1-a-docker.pkg.dev/farid-practice/devops-repo/frontend:11
+        image: us-central1-docker.pkg.dev/farid-practice/devops-repo/frontend:12
         ports:
         - containerPort: 80
