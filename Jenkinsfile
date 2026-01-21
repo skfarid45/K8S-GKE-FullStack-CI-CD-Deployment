@@ -3,11 +3,14 @@ pipeline {
 
     environment {
         PROJECT_ID = 'farid-practice'
-        REGION     = 'us-central1-a'
-        CLUSTER    = 'cluster-1'
 
-        FRONTEND_IMAGE = "us-central1-a-docker.pkg.dev/${PROJECT_ID}/devops-repo/frontend"
-        BACKEND_IMAGE  = "us-central1-a-docker.pkg.dev/${PROJECT_ID}/devops-repo/backend"
+        REGION  = 'us-central1'
+        ZONE    = 'us-central1-a'
+        CLUSTER = 'cluster-1'
+        REPO    = 'devops-repo'
+
+        FRONTEND_IMAGE = "us-central1-docker.pkg.dev/${PROJECT_ID}/${REPO}/frontend"
+        BACKEND_IMAGE  = "us-central1-docker.pkg.dev/${PROJECT_ID}/${REPO}/backend"
     }
 
     stages {
@@ -25,7 +28,7 @@ pipeline {
                     sh '''
                     gcloud auth activate-service-account --key-file=$GCP_KEY
                     gcloud config set project $PROJECT_ID
-                    gcloud auth configure-docker us-central1-a-docker.pkg.dev -q
+                    gcloud auth configure-docker us-central1-docker.pkg.dev -q
                     '''
                 }
             }
@@ -53,11 +56,10 @@ pipeline {
             steps {
                 sh '''
                 gcloud container clusters get-credentials $CLUSTER \
-                  --region $REGION --project $PROJECT_ID
+                  --zone $ZONE --project $PROJECT_ID
 
                 sed -e "s|IMAGE_TAG|$BUILD_NUMBER|g" \
-                    -e "s|PROJECT_ID|$PROJECT_ID|g" \
-                    k8s/*.yaml | kubectl apply -f k8s/
+                    k8s/*.yaml | kubectl apply -f k8s/-
                 '''
             }
         }
