@@ -57,7 +57,7 @@ pipeline {
 
                 sed -e "s|IMAGE_TAG|$BUILD_NUMBER|g" \
                     -e "s|PROJECT_ID|$PROJECT_ID|g" \
-                    k8s/*.yaml | kubectl apply -f -
+                    k8s/*.yaml | kubectl apply -f k8s/
                 '''
             }
         }
