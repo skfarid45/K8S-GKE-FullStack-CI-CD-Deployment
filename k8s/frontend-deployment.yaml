@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: gcr.io/PROJECT_ID/frontend:IMAGE_TAG
+        image: gcr.io/farid-practice/Frontend:IMAGE_TAG
         ports:
         - containerPort: 80
