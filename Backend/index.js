@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 
 app.get('/api/health', (req, res) => {
-  res.json({ message: 'Backend is running on GKE 🚀' });
+  res.json({ message: 'Backend is running on GKE ' });
 });
 
 app.listen(3000, () => {
